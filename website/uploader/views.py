@@ -4,4 +4,4 @@ from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
-    return HttpResponse("Hello here you ar for the video Uploader")
+    return HttpResponse("Hello  upload your video here for the captions ")
