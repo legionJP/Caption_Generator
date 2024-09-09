@@ -2,5 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns= [
-    path("", views.index,name="index"),
+    path("", views.home,name="uplopader-home"),
+    path('home/',views.home, name='uploader-home'),
 ]
