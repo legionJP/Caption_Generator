@@ -1,21 +1,12 @@
 from celery import shared_task
 import subprocess
 from .models import videos, Subtitle
-
-from celery import shared_task
 from google.cloud import speech_v1p1beta1 as speech
-from google.cloud.speech_v1p1beta1 import enums
-from google.cloud.speech_v1p1beta1 import types
-from .models import Video, Subtitle
-
-from celery import shared_task
-import subprocess
-from google.cloud import speech_v1p1beta1 as speech
-from .models import Video, Subtitle
+#from google.cloud.speech_v1p1beta1 import enums ,types
 
 @shared_task
 def extract_subtitles(video_id):
-    video = Video.objects.get(id=video_id)
+    video = videos.objects.get(id=video_id)
     video_path = video.v_file.path
     output_path = f"{video_path}.srt"
 
@@ -27,16 +18,20 @@ def extract_subtitles(video_id):
     with open(output_path, 'r') as file:
         for line in file:
             if '-->' in line:
-                timestamp = line.strip()
+                timestamps = line.strip().split(' --> ')
+                start_time = timestamps[0]
+                end_time = timestamps[1]
                 content = next(file).strip()
-                Subtitle.objects.create(video=video, language='en', content=content, timestamp=timestamp)
+                Subtitle.objects.create(video=video, language='en', content=content, start_time=start_time, end_time=end_time)
 
     video.processed_status = True
     video.save()
 
+#-----------------------------------------------------------------------------------------#
+
 @shared_task
 def generate_subtitles(video_id):
-    video = Video.objects.get(id=video_id)
+    video = videos.objects.get(id=video_id)
     video_path = video.v_file.path
 
     client = speech.SpeechClient()
@@ -58,7 +53,7 @@ def generate_subtitles(video_id):
             start_time = word_info.start_time.total_seconds()
             end_time = word_info.end_time.total_seconds()
             content = word_info.word
-            Subtitle.objects.create(video=video, language='en', content=content, timestamp=start_time)
+            Subtitle.objects.create(video=video, language='en', content=content, start_time=start_time,end_time=end_time)
 
     video.processed_status = True
     video.save()

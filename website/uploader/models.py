@@ -17,9 +17,14 @@ class Subtitle(models.Model):
    video= models.ForeignKey(videos,related_name='video_subtitles',on_delete=models.CASCADE)
    language= models.CharField(max_length=10)
    content = models.TextField()
-   timestamp = models.FloatField()
+   # timestamp = models.FloatField()
+   start_time = models.FloatField(default=0.0)
+   end_time = models.FloatField(default=0.0)
 
    def __str__(self):
-      return f"{self.video.title} - {self.language} - {self.timestamp}"
+      return f"{self.video.title} - {self.language} - {self.start_time} - {self.end_time}"
+
+   # def __str__(self):
+   #    return f"{self.video.title} - {self.language} - {self.timestamp}"
     
     
