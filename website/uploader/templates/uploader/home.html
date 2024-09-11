@@ -1,26 +1,10 @@
- {% block content %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caption Generator</title>
-</head>
-<body>
-   <p>
-    <h1>Video Uploader</h1>
-   </p> 
-</body>
-
-<video controls>
-    <source src="{{ video.video_file.url }}" type="video/mp4">
-    {% for lang, subtitle in video.subtitles.items %}
-    <track src="{{ subtitle }}" kind="subtitles" srclang="{{ lang }}" label="{{ lang }}">
-    {% endfor %}
-</video>
-
-<head>
-    <title>Upload Video</title>
+    <title>Video Uploader</title>
 </head>
 <body>
     <h1>Upload Video</h1>
@@ -29,17 +13,23 @@
         {{ form.as_p }}
         <button type="submit">Upload</button>
     </form>
-</body>
 
-head>
-    <title>Video List</title>
-</head>
-<body>
     <h1>Video List</h1>
     <ul>
         {% for video in videos %}
-        <li>{{ videos.title }} - Processed: {{ videos.processed_status }}</li>
+        <li>{{ video.title }} - Processed: {{ video.processed_status }}</li>
         {% endfor %}
     </ul>
+
+    {% if video %}
+    <video controls>
+        <source src="{{ video.v_file.url }}" type="video/mp4">
+        {% for lang, subtitle in video.subtitles.items %}
+        <track src="{{ subtitle }}" kind="subtitles" srclang="{{ lang }}" label="{{ lang }}">
+        {% endfor %}
+    </video>
+    {% endif %}
+</body>
 </html>
+
 {% endblock %}
