@@ -12,3 +12,4 @@ def home(request):
     # template = get_template('uploader/home.html')
     # print(template.origin)
     return render(request,'uploader/home.html')
+#-------------------------------------------------------------------
