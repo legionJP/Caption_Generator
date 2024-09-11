@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video List</title>
+</head>
+<body>
+    <h1>Video List</h1>
+    <ul>
+        {% for video in videos %}
+        <li>{{ video.title }} - Processed: {{ video.processed }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

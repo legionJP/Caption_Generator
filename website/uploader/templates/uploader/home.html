@@ -11,5 +11,35 @@
     <h1>Video Uploader</h1>
    </p> 
 </body>
+
+<video controls>
+    <source src="{{ video.video_file.url }}" type="video/mp4">
+    {% for lang, subtitle in video.subtitles.items %}
+    <track src="{{ subtitle }}" kind="subtitles" srclang="{{ lang }}" label="{{ lang }}">
+    {% endfor %}
+</video>
+
+<head>
+    <title>Upload Video</title>
+</head>
+<body>
+    <h1>Upload Video</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+</body>
+
+head>
+    <title>Video List</title>
+</head>
+<body>
+    <h1>Video List</h1>
+    <ul>
+        {% for video in videos %}
+        <li>{{ videos.title }} - Processed: {{ videos.processed_status }}</li>
+        {% endfor %}
+    </ul>
 </html>
 {% endblock %}
