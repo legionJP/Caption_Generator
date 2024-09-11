@@ -105,3 +105,15 @@ psql -h 127.0.0.1 -U your_db_user -d vcapgenerator
 \dt
 
 ```
+
+
+To Start Redis Manually:
+sudo systemctl start redis
+
+To Stop Redis Manually:
+sudo systemctl stop redis
+
+To Check Redis Status:
+sudo systemctl status redis
+
+By not enabling Redis to start on boot, you can
