@@ -23,7 +23,7 @@
 
     {% if video %}
     <video controls>
-        <source src="{{ video.v_file.url }}" type="video/mp4">
+        <source src="{{ videos.v_file.url }}" type="video/mp4">
         {% for lang, subtitle in video.subtitles.items %}
         <track src="{{ subtitle }}" kind="subtitles" srclang="{{ lang }}" label="{{ lang }}">
         {% endfor %}

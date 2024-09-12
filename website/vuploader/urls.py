@@ -27,4 +27,3 @@ urlpatterns = [
     # path('uploader/', include(('uploader.urls','uploader'),namespace='uploader')),
     
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-   

@@ -4,29 +4,6 @@ from .models import videos, Subtitle
 from google.cloud import speech_v1p1beta1 as speech
 #from google.cloud.speech_v1p1beta1 import enums ,types
 
-@shared_task
-def extract_subtitles(video_id):
-    video = videos.objects.get(id=video_id)
-    video_path = video.v_file.path
-    output_path = f"{video_path}.srt"
-
-    # Run CCExtractor to extract subtitles
-    command = f"ccextractor {video_path} -o {output_path}"
-    subprocess.run(command, shell=True)
-
-    # Read the extracted subtitles and save them to the database
-    with open(output_path, 'r') as file:
-        for line in file:
-            if '-->' in line:
-                timestamps = line.strip().split(' --> ')
-                start_time = timestamps[0]
-                end_time = timestamps[1]
-                content = next(file).strip()
-                Subtitle.objects.create(video=video, language='en', content=content, start_time=start_time, end_time=end_time)
-
-    video.processed_status = True
-    video.save()
-
 #-----------------------------------------------------------------------------------------#
 
 @shared_task
@@ -57,6 +34,31 @@ def generate_subtitles(video_id):
 
     video.processed_status = True
     video.save()
+
+#------------------------------------------------------------------
+@shared_task
+def extract_subtitles(video_id):
+    video = videos.objects.get(id=video_id)
+    video_path = video.v_file.path
+    output_path = f"{video_path}.srt"
+
+    # Run CCExtractor to extract subtitles
+    command = f"ccextractor {video_path} -o {output_path}"
+    subprocess.run(command, shell=True)
+
+    # Read the extracted subtitles and save them to the database
+    with open(output_path, 'r') as file:
+        for line in file:
+            if '-->' in line:
+                timestamps = line.strip().split(' --> ')
+                start_time = timestamps[0]
+                end_time = timestamps[1]
+                content = next(file).strip()
+                Subtitle.objects.create(video=video, language='en', content=content, start_time=start_time, end_time=end_time)
+
+    video.processed_status = True
+    video.save()
+#====
 
 @shared_task
 def process_video(video_id):
