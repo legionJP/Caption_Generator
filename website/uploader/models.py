@@ -16,6 +16,7 @@ class videos(models.Model):
 class Subtitle(models.Model):
    video= models.ForeignKey(videos,related_name='video_subtitles',on_delete=models.CASCADE)
    language= models.CharField(max_length=10)
+   file= models.FileField(upload_to='subtitles/',default='subtitles/placeholder.srt')
    content = models.TextField()
    # timestamp = models.FloatField()
    start_time = models.FloatField(default=0.0)
@@ -26,5 +27,3 @@ class Subtitle(models.Model):
 
    # def __str__(self):
    #    return f"{self.video.title} - {self.language} - {self.timestamp}"
-    
-    
