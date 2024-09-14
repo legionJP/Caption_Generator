@@ -146,7 +146,7 @@ def generate_subtitles(video_id):
         video_path = video.v_file.path
         audio_path = f"{video_path}.wav"
         whisper_output_path = f"{video_path}_whisper.srt"
-        embedded_video_path = f"{video_path}_embedded.mp4"
+        embedded_video_path = f"{video_path}"
         ccextractor_output_path = f"{video_path}_ccextractor.srt"
 
         # Extract audio using ffmpeg
