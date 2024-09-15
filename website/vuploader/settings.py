@@ -85,9 +85,11 @@ WSGI_APPLICATION = 'vuploader.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'vcapgenerator',
+       #'NAME': 'vcapgenerator',
+        'NAME': 'mydatabase',
         'USER': 'jp',
         'PASSWORD': 'ThisismyDB@23',
+        #'PASSWORD': 'vcapgenerator',
         'HOST': '127.0.0.1',
         'PORT': '5432',
         # "OPTIONS": {

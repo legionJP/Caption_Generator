@@ -36,7 +36,7 @@ sudo -u postgres psql
 4. Create a new database and user:
 
 CREATE DATABASE mydatabase;
-CREATE USER myuser WITH PASSWORD 'mypassword';
+CREATE USER jp WITH PASSWORD 'vcapgenerator';
 
 5. Grant the user access to the database:
 
