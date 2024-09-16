@@ -88,8 +88,8 @@ DATABASES = {
        #'NAME': 'vcapgenerator',
         'NAME': 'mydatabase',
         'USER': 'jp',
-        'PASSWORD': 'ThisismyDB@23',
-        #'PASSWORD': 'vcapgenerator',
+        #'PASSWORD': 'ThisismyDB@23',
+        'PASSWORD': 'vcapgenerator',
         'HOST': '127.0.0.1',
         'PORT': '5432',
         # "OPTIONS": {

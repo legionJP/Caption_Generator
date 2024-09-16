@@ -131,13 +131,86 @@ import whisper
 #----------------------------------code3-----------------------------------------------
 
 
+# from celery import shared_task
+# import subprocess
+# from .models import videos, Subtitle
+# import os
+# import ffmpeg
+# import whisper
+
+
+# @shared_task
+# def generate_subtitles(video_id):
+#     try:
+#         video = videos.objects.get(id=video_id)
+#         video_path = video.v_file.path
+#         audio_path = f"{video_path}.wav"
+#         whisper_output_path = f"{video_path}_whisper.srt"
+#         embedded_video_path = f"{video_path}"
+#         ccextractor_output_path = f"{video_path}_ccextractor.srt"
+
+#         # Extract audio using ffmpeg
+#         ffmpeg.input(video_path).output(audio_path).run()
+
+#         # Load Whisper model
+#         model = whisper.load_model("base")
+
+#         # Transcribe audio to text using Whisper
+#         result = model.transcribe(audio_path)
+
+#         # Save the Whisper-generated subtitles
+#         with open(whisper_output_path, 'w') as file:
+#             for segment in result['segments']:
+#                 start_time = segment['start']
+#                 end_time = segment['end']
+#                 text = segment['text']
+#                 file.write(f"{start_time} --> {end_time}\n{text}\n\n")
+
+#         # Embed subtitles into the video using FFmpeg
+#         command = f"ffmpeg -i {video_path} -vf subtitles={whisper_output_path} {embedded_video_path}"
+#         subprocess.run(command, shell=True)
+
+#         # # Extract existing subtitles using CCExtractor
+#         # command = f"ccextractor {embedded_video_path} -o {ccextractor_output_path}"
+#         # subprocess.run(command, shell=True)
+
+#         # Save Whisper-generated subtitles to the database
+#         for segment in result['segments']:
+#             start_time = segment['start']
+#             end_time = segment['end']
+#             text = segment['text']
+#             Subtitle.objects.create(video=video, language='en', content=text, start_time=start_time, end_time=end_time)
+
+#         # # Save CCExtractor-generated subtitles to the database
+#         # if os.path.exists(ccextractor_output_path):
+#         #     with open(ccextractor_output_path, 'r') as file:
+#         #         for line in file:
+#         #             if '-->' in line:
+#         #                 timestamps = line.strip().split(' --> ')
+#         #                 start_time = timestamps[0]
+#         #                 end_time = timestamps[1]
+#         #                 content = next(file).strip()
+#         #                 Subtitle.objects.create(video=video, language='en', content=content, start_time=start_time, end_time=end_time)
+
+#         video.processed_status = True
+#         video.save()
+#         print(f"Subtitles generated and embedded successfully for video ID {video_id}")
+
+#     except Exception as e:
+#         print(f"Subtitle generation failed for video ID {video_id}: {e}")
+
+
+
+
+
+
 from celery import shared_task
 import subprocess
 from .models import videos, Subtitle
 import os
 import ffmpeg
 import whisper
-
+import shlex
 
 @shared_task
 def generate_subtitles(video_id):
@@ -147,7 +220,7 @@ def generate_subtitles(video_id):
         audio_path = f"{video_path}.wav"
         whisper_output_path = f"{video_path}_whisper.srt"
         embedded_video_path = f"{video_path}"
-        ccextractor_output_path = f"{video_path}_ccextractor.srt"
+        #ccextractor_output_path = f"{video_path}_ccextractor.srt"
 
         # Extract audio using ffmpeg
         ffmpeg.input(video_path).output(audio_path).run()
@@ -166,13 +239,16 @@ def generate_subtitles(video_id):
                 text = segment['text']
                 file.write(f"{start_time} --> {end_time}\n{text}\n\n")
 
-        # Embed subtitles into the video using FFmpeg
-        command = f"ffmpeg -i {video_path} -vf subtitles={whisper_output_path} {embedded_video_path}"
-        subprocess.run(command, shell=True)
+        # Check if subtitle file exists
+        if not os.path.exists(whisper_output_path):
+            raise FileNotFoundError(f"Subtitle file not found: {whisper_output_path}")
 
-        # Extract existing subtitles using CCExtractor
-        command = f"ccextractor {embedded_video_path} -o {ccextractor_output_path}"
-        subprocess.run(command, shell=True)
+        # Embed subtitles into the video using FFmpeg
+        command = f"ffmpeg -i {shlex.quote(video_path)} -vf subtitles=file={shlex.quote(whisper_output_path)} {shlex.quote(embedded_video_path)}"
+        print(f"Running command: {command}")
+        result = subprocess.run(command, shell=True, capture_output=True, text=True)
+        print(result.stdout)
+        print(result.stderr)
 
         # Save Whisper-generated subtitles to the database
         for segment in result['segments']:
@@ -180,17 +256,6 @@ def generate_subtitles(video_id):
             end_time = segment['end']
             text = segment['text']
             Subtitle.objects.create(video=video, language='en', content=text, start_time=start_time, end_time=end_time)
-
-        # Save CCExtractor-generated subtitles to the database
-        if os.path.exists(ccextractor_output_path):
-            with open(ccextractor_output_path, 'r') as file:
-                for line in file:
-                    if '-->' in line:
-                        timestamps = line.strip().split(' --> ')
-                        start_time = timestamps[0]
-                        end_time = timestamps[1]
-                        content = next(file).strip()
-                        Subtitle.objects.create(video=video, language='en', content=content, start_time=start_time, end_time=end_time)
 
         video.processed_status = True
         video.save()

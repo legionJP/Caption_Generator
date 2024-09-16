@@ -117,3 +117,8 @@ To Check Redis Status:
 sudo systemctl status redis
 
 By not enabling Redis to start on boot, you can
+
+```
+https://www.digitalocean.com/community/tutorials/how-to-generate-and-add-subtitles-to-videos-using-python-openai-whisper-and-ffmpeg
+
+```
