@@ -3,3 +3,4 @@ venv
 lib
 *.pyc
 .cpython
+videos

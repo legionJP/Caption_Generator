@@ -16,7 +16,7 @@ class videos(models.Model):
 class Subtitle(models.Model):
    video= models.ForeignKey(videos,related_name='video_subtitles',on_delete=models.CASCADE)
    language= models.CharField(max_length=10)
-   file= models.FileField(upload_to='subtitles/',default='subtitles/placeholder.srt')
+   file= models.FileField(upload_to='subtitles/') #,default='subtitles/placeholder.srt')
    content = models.TextField()
    # timestamp = models.FloatField()
    start_time = models.FloatField(default=0.0)

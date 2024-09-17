@@ -15,10 +15,10 @@
     </form>
 
     <h1>Video List</h1>
-    <ul>
+    <!-- <ul>
         {% for video in videos %}
         <li>{{ video.v_file.name }} - Processed: {{ video.processed_status }}</li>
-        {% if video.processed_status %}
+        
         <video width="640" height="360" controls>
             <source src="{{ video.v_file.url }}" type="video/mp4">
             {% for subtitle in video.subtitle_set.all %}
@@ -26,10 +26,29 @@
             {% endfor %}
             Your browser does not support the video tag.
         </video>
-        {% endif %}
+       
         </li>
         {% endfor %}
-    </ul>
+    </ul> -->
+    
+    {% for video in videos %}
+    <video width="640" height="360" controls>
+        <!-- Video Source -->
+        <source src="{{ video.v_file.url }}" type="video/mp4">
+
+        <!-- Subtitles for multiple languages -->
+        {% for subtitle in video.video_subtitles.all %}
+        <track src="{{ subtitle.file.url }}" kind="subtitles" srclang="{{ subtitle.language }}" label="{{ subtitle.language }}">
+        {% endfor %}
+
+        <!-- Fallback message -->
+        Your browser does not support the video tag.
+    </video>
+
+    <h3>{{ video.title }}</h3>  <!-- Video Title -->
+    {% endfor %}
+
+
 </body>
 </html>
 {% endblock %}
