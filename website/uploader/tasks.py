@@ -6,8 +6,6 @@ import ffmpeg
 import whisper
 import shlex
 from django.conf import settings
-#from google.cloud.speech_v1p1beta1 import enums ,types
-
 #-----------------------------------------------------------------------------------------#
 
 
@@ -25,12 +23,12 @@ def generate_subtitles(video_id):
 
         # Define languages to generate subtitles for
         #languages = ['en', 'es', 'fr', 'de','']  # English, Spanish, French, German
-        languages = ['en', 'hi', 'fr', 'de'] 
+        languages = ['en', 'hi', 'fr'] 
            # 'es', 'it', 'pt', 'ru', 'ja', 'ko', 'zh',
             #'ar', 'bn', 'pl', 'vi', 'tr', 'nl', 'he', 'el']
             # Add more supported language codes if necessary
         
-        subtitles_dir = os.path.join(settings.MEDIA_ROOT, 'subtitles')
+        subtitles_dir = os.path.join(settings.MEDIA_ROOT, 'videos')
         os.makedirs(subtitles_dir, exist_ok=True)
 
         for lang in languages:

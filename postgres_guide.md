@@ -25,7 +25,8 @@ python manage.py startapp 'appname'
 ## 1. Setting up the PostgresSQL
 ```
 1. Install PostgreSQL and Dependencies (on linux system)
-sudo apt install postgresql postgresql-contrib libpq-dev python3-dev
+
+-- sudo apt install postgresql postgresql-contrib libpq-dev python3-dev
 
 2. Install psycopg2
 pip install psycopg2
