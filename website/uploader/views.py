@@ -33,7 +33,34 @@ def home(request):
     return render(request, 'uploader/home.html', {'form': form, 'videos': video_list})
 
 
+#----------------------Search View--------------------------#
+from django.db.models import Q
+from .models import videos, Subtitle
 
+def search(request):
+    results = []
+    query = request.POST.get('query', '').lower()
+    context = {
+        'results': results,
+        'query_title': 'All Results',
+        'query': query
+    }
+
+    if query:
+        subtitles = Subtitle.objects.filter(content__icontains=query)
+        for subtitle in subtitles:
+            video = subtitle.video
+            results.append({
+                'video_title': video.title,
+                'timestamp': subtitle.start_time,
+                'video_url': video.v_file.url
+            })
+        context['results'] = results
+        context['query_title'] = f'Search results for "{query}"'
+    else:
+        context['query_title'] = "No search query entered"
+
+    return render(request, 'uploader/home.html', context)
 
 
 # def upload_video(request):

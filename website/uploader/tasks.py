@@ -1,11 +1,3 @@
-from celery import shared_task
-import subprocess
-from .models import videos, Subtitle
-import os
-import ffmpeg
-import whisper
-import shlex
-from django.conf import settings
 #-----------------------------------------------------------------------------------------#
 from celery import shared_task
 import subprocess
