@@ -1,9 +1,9 @@
 # About:
 
-## this is the projec of a that a website that allows users to upload videos, which is processed in the background. After processing and extracting subtitles from the video, the subtitles are returned to the frontend, and integrated with the video, and displayed as closed captions in the multiple langugaes.
+### This is the project of  a website that allows users to upload videos, which is processed in the background. After processing and extracting subtitles from the video, the subtitles are returned to the frontend, and integrated with the video, and displayed as closed captions in the multiple langugaes.
 
 
-# Project setup Steps/Guide 
+# Project Setup Steps/Guide 
 
 1. [Project set up and Postgres SQL Guide](Documentation/postgres_guide.md)
 2. [Packages, library and dependencies Installation](Documentation/packages_guide.md)
@@ -12,7 +12,7 @@
 
 
 
-# Project  Requiremnet Description: 
+# Project  Requirements Description: 
 
 ## Django Developer Assignment
 
