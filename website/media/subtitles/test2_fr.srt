@@ -1,0 +1,44 @@
+1
+00:00:00,000 --> 00:00:02,000
+ Chris, je suis dans le centre de quelque chose.
+
+2
+00:00:02,000 --> 00:00:02,000
+ Zeep ?
+
+3
+00:00:02,000 --> 00:00:05,000
+ C'est Rick, l'Alien.
+
+4
+00:00:05,000 --> 00:00:06,000
+ Rick, l'Alien.
+
+5
+00:00:06,000 --> 00:00:08,000
+ Rick, l'Alien.
+
+6
+00:00:08,000 --> 00:00:10,000
+ Rély, vous allez vous mettre ce qui est le moment ?
+
+7
+00:00:10,000 --> 00:00:12,000
+ Je me dis que votre entire civilisation,
+
+8
+00:00:12,000 --> 00:00:14,000
+ vos gens ont un nom de Rick qui est dit.
+
+9
+00:00:14,000 --> 00:00:16,000
+ Ils ont des gens qui sont à l'école.
+
+10
+00:00:16,000 --> 00:00:18,000
+ Je suis tombé à l'école, ce n'est pas un pays pour les gens de la mort.
+
+11
+00:00:18,000 --> 00:00:20,000
+ Oh, snap !
+

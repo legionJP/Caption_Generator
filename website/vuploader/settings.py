@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'uploader.middleware.SRTContentTypeMiddleware',
 ]
 
 ROOT_URLCONF = 'vuploader.urls'
@@ -85,11 +86,11 @@ WSGI_APPLICATION = 'vuploader.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-       #'NAME': 'vcapgenerator',
-        'NAME': 'mydatabase',
+        'NAME': 'vcapgenerator',
+        #'NAME': 'mydatabase',
         'USER': 'jp',
-        #'PASSWORD': 'ThisismyDB@23',
-        'PASSWORD': 'vcapgenerator',
+        'PASSWORD': 'ThisismyDB@23',
+        #'PASSWORD': 'vcapgenerator',
         'HOST': '127.0.0.1',
         'PORT': '5432',
         # "OPTIONS": {
@@ -145,6 +146,10 @@ MEDIA_URL = '/media/'        #media url is the public url of the media directory
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import mimetypes
+mimetypes.add_type("text/srt", ".srt", True)
+CORS_ALLOW_ALL_ORIGINS = True  # Or configure this as needed for your setup
 
 
 
