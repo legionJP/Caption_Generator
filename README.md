@@ -5,9 +5,10 @@
 
 # Project setup Steps/Guide 
 
-1. [Project set up and Postgres SQL Guide](postgres_guide.md)
-2. [Packages, library and dependencies Installation](packages_guide.md)
-3. [Docker and Docker File  setup ](dockerguide.md)
+1. [Project set up and Postgres SQL Guide](Documentation/postgres_guide.md)
+2. [Packages, library and dependencies Installation](Documentation/packages_guide.md)
+3. [Docker and Docker File  setup ](Documentation/dockerguide.md)
+4. [Screen-shots of the project working](screenshots)
 
 
 
