@@ -34,8 +34,3 @@ We at Fatmug are looking for a candidate to help develop, maintain, and optimize
 4. **Frontend**: The UI (frontend) of the website will not be a criterion for judgment. Therefore, a simple and functional frontend is acceptable. Evaluation will be based solely on the use of Django and PostgreSQL.
 5. **Storage**: Store the processed videos in the Django media folder and save the extracted subtitles in a PostgreSQL database.
 6. **Test Case**: The web application should successfully process and handle the provided sample video.
-
-### Submission
-
-- Include a `screenshots` folder in the project directory containing screenshots of the application in use. Capture screenshots of every possible action.
-- Upload the project to GitHub and provide the repository link.
