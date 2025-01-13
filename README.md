@@ -1,8 +1,10 @@
 # Video Caption Generator 
 
 # Backgorund 
-```
-This Django Web- Project allows users to upload videos, which is processed in the background. After processing and extracting subtitles from the video, the subtitles are returned to the frontend, and integrated with the video, and displayed as closed captions in the multiple langugaes.
+```diff
+This Django Web- Project allows users to upload videos, which is processed in the background.
+After processing and extracting subtitles from the video, the subtitles are returned to the frontend and integrated with the video
+ It also offers closed captions in the many langugaes.
 ```
 
 # Project Setup Steps/Guide 
