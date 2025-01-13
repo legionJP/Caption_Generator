@@ -2,6 +2,7 @@
 
 #
 # Backgorund 
+## [Project Background](Documentation/ProjectSetup.md)
 
 - This Django Web- Project allows users to upload videos, which is processed in the background.
 - After processing and extracting subtitles from the video, the subtitles are returned to the front-end and integrated with the video.
