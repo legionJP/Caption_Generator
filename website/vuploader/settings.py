@@ -87,10 +87,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         #'NAME': 'vcapgenerator',
-        'NAME': 'mydatabase',
+        'NAME': 'mydb',
         'USER': 'jp',
-        #'PASSWORD': 'ThisismyDB@23',
-        'PASSWORD': 'vcapgenerator',
+        'PASSWORD': 'ThisisMyDB@23',
+        #'PASSWORD': 'vcapgenerator',
         'HOST': '127.0.0.1',
         'PORT': '5432',
         # "OPTIONS": {
